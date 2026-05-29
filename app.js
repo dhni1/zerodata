@@ -281,6 +281,46 @@ function renderKpis() {
     .join("");
 }
 
+function renderInsights() {
+  const data = regionSummary();
+  const top = data.reduce((best, row) => (row.avg2025 > best.avg2025 ? row : best), data[0]);
+  const bottom = data.reduce((weak, row) => (row.avg2025 < weak.avg2025 ? row : weak), data[0]);
+  const weakAi = schools.filter((school) => school.groups.ai <= 4);
+  const lowComplement = schools.filter((school) => school.complement < 0.5);
+  const gap = Math.round(top.avg2025 - bottom.avg2025);
+  const insights = [
+    {
+      value: `${gap}개`,
+      title: `${top.region}과 ${bottom.region}의 평균 격차`,
+      copy: "같은 고교학점제 안에서도 지역별 과목 선택 폭이 다르게 나타납니다.",
+    },
+    {
+      value: `${weakAi.length}교`,
+      title: "정보·AI 과목 보완 필요",
+      copy: "AI·데이터 계열 희망 학생에게 공동교육과정 연결이 필요합니다.",
+    },
+    {
+      value: `${lowComplement.length}교`,
+      title: "공동교육 보완율 50% 미만",
+      copy: "학교 밖 대안까지 포함해도 접근성이 낮은 우선 지원 후보입니다.",
+    },
+  ];
+
+  $("#insightList").innerHTML = insights
+    .map(
+      (item) => `
+        <article class="insight-item">
+          <span class="insight-value">${item.value}</span>
+          <span class="insight-copy">
+            <strong>${item.title}</strong>
+            <span>${item.copy}</span>
+          </span>
+        </article>
+      `,
+    )
+    .join("");
+}
+
 function setupCanvas(canvas) {
   const ratio = window.devicePixelRatio || 1;
   const rect = canvas.getBoundingClientRect();
@@ -528,6 +568,7 @@ function renderCharts() {
 function renderDashboard() {
   renderFilters();
   renderKpis();
+  renderInsights();
   renderCharts();
   renderSchoolTable();
 }

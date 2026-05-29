@@ -134,7 +134,7 @@
             </aside>
 
             <div class="dashboard-grid">
-              <section class="panel panel-wide">
+              <section class="panel chart-panel">
                 <div class="panel-heading">
                   <div>
                     <p class="panel-kicker">지역 비교</p>
@@ -142,27 +142,37 @@
                   </div>
                   <span class="chip">2024-2026</span>
                 </div>
-                <canvas id="regionChart" class="chart-canvas" height="260"></canvas>
+                <canvas id="regionChart" class="chart-canvas" height="220"></canvas>
               </section>
 
-              <section class="panel">
+              <section class="panel insight-panel">
+                <div class="panel-heading">
+                  <div>
+                    <p class="panel-kicker">핵심 해석</p>
+                    <h2>한눈에 보는 격차</h2>
+                  </div>
+                </div>
+                <div class="insight-list" id="insightList"></div>
+              </section>
+
+              <section class="panel chart-panel">
                 <div class="panel-heading">
                   <div>
                     <p class="panel-kicker">과목군</p>
                     <h2>지역별 다양성</h2>
                   </div>
                 </div>
-                <canvas id="groupChart" class="chart-canvas" height="260"></canvas>
+                <canvas id="groupChart" class="chart-canvas" height="220"></canvas>
               </section>
 
-              <section class="panel">
+              <section class="panel chart-panel">
                 <div class="panel-heading">
                   <div>
                     <p class="panel-kicker">예측</p>
                     <h2>2026 접근성 전망</h2>
                   </div>
                 </div>
-                <canvas id="forecastChart" class="chart-canvas" height="260"></canvas>
+                <canvas id="forecastChart" class="chart-canvas" height="220"></canvas>
               </section>
 
               <section class="panel panel-wide">
