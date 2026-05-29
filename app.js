@@ -141,23 +141,6 @@ const groupColors = {
   language: "#5f8f61",
 };
 
-const deckSlides = [
-  ["제목", "CourseBridge와 주제명", "도입"],
-  ["문제 제기", "학생의 선택권은 정말 모두에게 같은가", "문제"],
-  ["지역별 학교 분포", "도시·농산어촌 학교 인프라 차이", "데이터"],
-  ["학교별 개설 과목 수", "선택 가능한 과목 총량 비교", "데이터"],
-  ["진로선택 과목 격차", "진로 탐색 기회 차이", "데이터"],
-  ["과목군별 부족", "정보·AI, 심화과학 접근성", "데이터"],
-  ["공동교육과정 보완율", "학교 밖 수강 대안의 효과", "데이터"],
-  ["서비스 제안", "CourseBridge 핵심 개념", "서비스"],
-  ["학생용 기능", "희망 과목 기반 수강 경로 추천", "서비스"],
-  ["학교·교육청 기능", "부족 과목과 개설 우선순위", "서비스"],
-  ["부족 과목 진단", "학교 입력 후 접근성 판정", "개발"],
-  ["공동수강 매칭", "2026 예측 그래프와 수요 조합", "개발"],
-  ["기대효과·한계", "효과, 한계, 보완 계획", "정리"],
-  ["결론", "제도적 선택권에서 실제 접근권으로", "마무리"],
-];
-
 const state = {
   region: "전체",
   query: "",
@@ -686,25 +669,10 @@ function renderPriorityGrid() {
     .map(
       (item) => `
         <article class="priority-card">
-          <span class="deck-tag" style="background:${groupColors[item.key]}22;color:${groupColors[item.key]}">${item.label}</span>
+          <span class="priority-tag" style="background:${groupColors[item.key]}22;color:${groupColors[item.key]}">${item.label}</span>
           <strong>${item.count}개교 우선 보완</strong>
           <span>${item.regions} 권역에서 부족 신호가 높습니다.</span>
           <div class="metric-line"><span>희망 수요</span><b>${item.demand}명</b></div>
-        </article>
-      `,
-    )
-    .join("");
-}
-
-function renderDeck() {
-  $("#deckGrid").innerHTML = deckSlides
-    .map(
-      ([title, body, tag], index) => `
-        <article class="deck-card">
-          <span class="deck-number">${index + 1}</span>
-          <span class="deck-tag">${tag}</span>
-          <h2>${title}</h2>
-          <p>${body}</p>
         </article>
       `,
     )
@@ -776,7 +744,6 @@ function bindEvents() {
 function init() {
   renderMatcherOptions();
   renderPriorityGrid();
-  renderDeck();
   bindEvents();
   renderDashboard();
   renderMatch();

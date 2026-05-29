@@ -123,7 +123,7 @@ svg {
 
 .view-tabs {
   display: inline-grid;
-  grid-template-columns: repeat(3, minmax(82px, 1fr));
+  grid-template-columns: repeat(2, minmax(82px, 1fr));
   gap: 4px;
   padding: 4px;
   background: #e8eeee;
@@ -724,8 +724,7 @@ input[type="range"] {
 }
 
 .route-card,
-.priority-card,
-.deck-card {
+.priority-card {
   display: grid;
   gap: 10px;
   padding: 14px;
@@ -740,8 +739,7 @@ input[type="range"] {
 }
 
 .route-card span,
-.priority-card span,
-.deck-card p {
+.priority-card span {
   color: var(--muted);
   font-size: 0.86rem;
 }
@@ -759,34 +757,7 @@ input[type="range"] {
   color: var(--ink);
 }
 
-.deck-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-}
-
-.deck-card {
-  min-height: 160px;
-}
-
-.deck-number {
-  display: grid;
-  width: 38px;
-  height: 38px;
-  place-items: center;
-  color: white;
-  background: var(--teal-dark);
-  border-radius: 8px;
-  font-weight: 900;
-}
-
-.deck-card h2 {
-  margin: 0;
-  font-size: 1rem;
-  line-height: 1.25;
-}
-
-.deck-tag {
+.priority-tag {
   width: fit-content;
   min-height: 24px;
   padding: 0 8px;
@@ -830,8 +801,7 @@ input[type="range"] {
   }
 
   .route-grid,
-  .priority-grid,
-  .deck-grid {
+  .priority-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -881,8 +851,7 @@ input[type="range"] {
   .filter-rail,
   .matcher-layout,
   .route-grid,
-  .priority-grid,
-  .deck-grid {
+  .priority-grid {
     grid-template-columns: 1fr;
   }
 
