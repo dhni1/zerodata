@@ -17,223 +17,170 @@
               <path d="M20 8v5.2" />
             </svg>
           </span>
-          <span class="brand-text">
-            <strong>CourseBridge</strong>
-          </span>
+          <strong>CourseBridge</strong>
         </div>
-
-        <nav class="view-tabs" aria-label="주요 화면">
-          <button class="tab-button is-active" type="button" data-view="overview" aria-pressed="true">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M4 19V5" />
-              <path d="M4 19h16" />
-              <rect x="7" y="11" width="3" height="5" rx="1" />
-              <rect x="12" y="8" width="3" height="8" rx="1" />
-              <rect x="17" y="6" width="3" height="10" rx="1" />
-            </svg>
-            <span>분석</span>
-          </button>
-          <button class="tab-button" type="button" data-view="matcher" aria-pressed="false">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 8a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
-              <path d="M18 5a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
-              <path d="M18 13a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
-              <path d="M8.8 9.5 15.2 7" />
-              <path d="M8.8 12.5 15.2 16" />
-            </svg>
-            <span>매칭</span>
-          </button>
-        </nav>
-
       </header>
 
       <main>
-        <section class="view-panel is-visible" id="overview" data-view-panel="overview">
-          <div class="hero">
-            <img class="hero-image" src="assets/coursebridge-network.png" alt="" aria-hidden="true" />
-            <div class="hero-scrim" aria-hidden="true"></div>
-            <div class="hero-content">
-              <div class="region-segment" role="group" aria-label="지역 필터">
-                <button type="button" class="segment-button is-active" data-region="전체">전체</button>
-                <button type="button" class="segment-button" data-region="서울">서울</button>
-                <button type="button" class="segment-button" data-region="경기">경기</button>
-                <button type="button" class="segment-button" data-region="전북">전북</button>
-                <button type="button" class="segment-button" data-region="강원">강원</button>
-              </div>
+        <section class="hero-app">
+          <div class="hero-copy">
+            <p class="service-label">AI 공동수강 매칭 서비스</p>
+            <h1>CourseBridge</h1>
+            <p class="intro-copy">
+              고교학점제에서 학생이 원하는 과목을 더 쉽게 찾고 수강할 수 있도록 학교별 개설 과목, 공동교육과정, 학생 희망 과목 데이터를 함께 분석합니다.
+            </p>
+
+            <div class="feature-grid" aria-label="서비스 핵심 기능">
+              <article class="feature-item">
+                <strong>AI 매칭 엔진</strong>
+                <span>교내 개설 여부와 학생 수요를 분석해 개인 맞춤형 수강 경로 추천</span>
+              </article>
+              <article class="feature-item">
+                <strong>온·오프라인 통합</strong>
+                <span>공동교육과정, 온라인 강좌, 인근 학교 강좌까지 하나의 경로로 연결</span>
+              </article>
+              <article class="feature-item">
+                <strong>개설 과목 추천</strong>
+                <span>학교와 교육청에 부족 과목과 우선 개설 후보를 제안해 선택권 격차 완화</span>
+              </article>
             </div>
           </div>
 
-          <div class="kpi-grid" id="kpiGrid" aria-live="polite"></div>
-
-          <section class="analysis-workspace">
-            <aside class="filter-rail" aria-label="데이터 필터">
-              <div class="field">
-                <label for="schoolSearch">학교 검색</label>
-                <div class="input-wrap">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <circle cx="11" cy="11" r="6" />
-                    <path d="m16 16 4 4" />
-                  </svg>
-                  <input id="schoolSearch" type="search" placeholder="학교명 또는 지역" autocomplete="off" />
-                </div>
-              </div>
-
-              <div class="field">
-                <label for="courseGroupFilter">과목군</label>
-                <select id="courseGroupFilter">
-                  <option value="전체">전체</option>
-                  <option value="science">과학</option>
-                  <option value="ai">정보·AI</option>
-                  <option value="humanities">인문사회</option>
-                  <option value="arts">예체능</option>
-                  <option value="language">제2외국어</option>
-                </select>
-              </div>
-
-              <div class="toggle-block" role="group" aria-label="위험 필터">
-                <label class="check-row">
-                  <input id="riskOnly" type="checkbox" />
-                  <span>보완 필요 학교만</span>
-                </label>
-                <label class="check-row">
-                  <input id="aiOnly" type="checkbox" />
-                  <span>정보·AI 부족 학교만</span>
-                </label>
-              </div>
-
-              <div class="source-box">
-                <strong>데이터 구성</strong>
-                <span>학교 기본정보</span>
-                <span>학교별 교육과정 편성표</span>
-                <span>공동교육과정 강좌 목록</span>
-                <span>학생 희망 과목 수요</span>
-              </div>
-            </aside>
-
-            <div class="dashboard-grid">
-              <section class="panel chart-panel">
-                <div class="panel-heading">
-                  <div>
-                    <p class="panel-kicker">지역 비교</p>
-                    <h2>평균 선택과목 수</h2>
-                  </div>
-                  <span class="chip">2024-2026</span>
-                </div>
-                <canvas id="regionChart" class="chart-canvas" height="220"></canvas>
-              </section>
-
-              <section class="panel insight-panel">
-                <div class="panel-heading">
-                  <div>
-                    <p class="panel-kicker">핵심 해석</p>
-                    <h2>한눈에 보는 격차</h2>
-                  </div>
-                </div>
-                <div class="insight-list" id="insightList"></div>
-              </section>
-
-              <section class="panel chart-panel">
-                <div class="panel-heading">
-                  <div>
-                    <p class="panel-kicker">과목군</p>
-                    <h2>지역별 다양성</h2>
-                  </div>
-                </div>
-                <canvas id="groupChart" class="chart-canvas" height="220"></canvas>
-              </section>
-
-              <section class="panel chart-panel">
-                <div class="panel-heading">
-                  <div>
-                    <p class="panel-kicker">예측</p>
-                    <h2>2026 접근성 전망</h2>
-                  </div>
-                </div>
-                <canvas id="forecastChart" class="chart-canvas" height="220"></canvas>
-              </section>
-
-              <section class="panel panel-wide">
-                <div class="panel-heading">
-                  <div>
-                    <p class="panel-kicker">학교 진단</p>
-                    <h2>선택권 지수 테이블</h2>
-                  </div>
-                  <span class="chip" id="tableCount">0개교</span>
-                </div>
-                <div class="table-shell">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>학교</th>
-                        <th>지역</th>
-                        <th>2025 선택과목</th>
-                        <th>진로·전문</th>
-                        <th>정보·AI</th>
-                        <th>보완율</th>
-                        <th>진단</th>
-                        <th aria-label="매칭"></th>
-                      </tr>
-                    </thead>
-                    <tbody id="schoolRows"></tbody>
-                  </table>
-                </div>
-              </section>
+          <section class="panel input-panel" aria-label="AI 매칭 입력">
+            <div class="panel-heading">
+              <p class="panel-kicker">AI 매칭 입력</p>
+              <h2>수강 경로 추천</h2>
             </div>
+
+            <div class="field">
+              <label for="matcherSchool">학교</label>
+              <select id="matcherSchool"></select>
+            </div>
+
+            <div class="field">
+              <label for="matcherCourse">희망 과목</label>
+              <select id="matcherCourse"></select>
+            </div>
+
+            <div class="field">
+              <label for="careerField">희망 진로</label>
+              <select id="careerField">
+                <option value="공학·AI">공학·AI</option>
+                <option value="자연과학">자연과학</option>
+                <option value="인문사회">인문사회</option>
+                <option value="예술·미디어">예술·미디어</option>
+                <option value="국제·언어">국제·언어</option>
+                <option value="상관없음">상관없음</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="studentCount">우리 학교 예상 수요</label>
+              <input id="studentCount" type="range" min="1" max="24" value="7" />
+              <div class="range-meta">
+                <span>1명</span>
+                <strong id="studentCountLabel">7명</strong>
+                <span>24명</span>
+              </div>
+            </div>
+
+            <button class="primary-action" type="button" id="runMatchButton">AI 추천 실행</button>
           </section>
         </section>
 
-        <section class="view-panel" id="matcher" data-view-panel="matcher" hidden>
-          <div class="page-band">
-            <div class="section-title">
-              <p class="eyebrow">CourseBridge 매칭 엔진</p>
-            </div>
+        <section class="work-section">
+          <div class="section-title">
+            <span>01</span>
+            <h2>개인 맞춤형 수강 경로 추천</h2>
+          </div>
 
-            <div class="matcher-layout">
-              <section class="panel input-panel">
-                <div class="panel-heading">
-                  <div>
-                    <p class="panel-kicker">학생 입력</p>
-                    <h2>수강 경로 진단</h2>
-                  </div>
-                </div>
-                <div class="field">
-                  <label for="matcherSchool">학교</label>
-                  <select id="matcherSchool"></select>
-                </div>
-                <div class="field">
-                  <label for="matcherCourse">희망 과목</label>
-                  <select id="matcherCourse"></select>
-                </div>
-                <div class="field">
-                  <label for="studentCount">예상 수요</label>
-                  <input id="studentCount" type="range" min="1" max="24" value="7" />
-                  <div class="range-meta">
-                    <span>1명</span>
-                    <strong id="studentCountLabel">7명</strong>
-                    <span>24명</span>
-                  </div>
-                </div>
-              </section>
+          <div class="flow-strip flow-blue" aria-label="개인 맞춤형 추천 절차">
+            <span>우리 학교 개설 여부 확인</span>
+            <span>미개설 시 대체 경로 추천</span>
+            <span>진로 분야별 과목 조합 제시</span>
+            <span>공동교육과정·온라인 강좌 연결</span>
+          </div>
 
-              <section class="panel match-result-panel">
-                <div class="panel-heading">
-                  <div>
-                    <p class="panel-kicker">추천 결과</p>
-                    <h2 id="matchTitle">공동수강 매칭</h2>
-                  </div>
-                  <span class="score-pill" id="matchScore">0점</span>
-                </div>
-                <div class="match-status" id="matchStatus"></div>
-                <div class="route-grid" id="routeGrid"></div>
-              </section>
-            </div>
+          <div class="result-layout">
+            <section class="panel result-panel" aria-live="polite">
+              <div class="result-heading">
+                <span class="status-badge" id="routeBadge">분석 대기</span>
+                <strong class="score-pill" id="matchScore">0점</strong>
+              </div>
+              <h3 id="matchTitle">수강 경로를 분석합니다</h3>
+              <p id="matchSummary"></p>
+
+              <div class="metric-grid">
+                <article>
+                  <span>교내 개설</span>
+                  <strong id="schoolAvailability">-</strong>
+                </article>
+                <article>
+                  <span>결합 수요</span>
+                  <strong id="combinedDemand">-</strong>
+                </article>
+                <article>
+                  <span>외부 경로</span>
+                  <strong id="externalRoute">-</strong>
+                </article>
+              </div>
+
+              <div class="route-step-list" id="routeSteps"></div>
+            </section>
 
             <section class="panel">
               <div class="panel-heading">
-                <div>
-                  <p class="panel-kicker">교육청용</p>
-                  <h2>개설 우선순위</h2>
-                </div>
+                <p class="panel-kicker">추천 경로</p>
+                <h2>학생에게 제시할 선택지</h2>
+              </div>
+              <div class="card-list" id="recommendationCards"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+                <p class="panel-kicker">진로 설계</p>
+                <h2>함께 들으면 좋은 과목</h2>
+              </div>
+              <div class="course-combo" id="careerCourseList"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="work-section">
+          <div class="section-title">
+            <span>02</span>
+            <h2>학교 간 공동수강 매칭 및 개설 우선순위 분석</h2>
+          </div>
+
+          <div class="flow-strip flow-orange" aria-label="공동수강 개설 분석 절차">
+            <span>학교별 부족 과목군 진단</span>
+            <span>여러 학교의 소규모 수요 통합</span>
+            <span>공동강좌 개설 가능 학교 조합 추천</span>
+            <span>교육청 우선 지원 지역·과목 분석</span>
+            <span>개설 효과 시뮬레이션</span>
+          </div>
+
+          <div class="priority-layout">
+            <section class="panel">
+              <div class="panel-heading">
+                <p class="panel-kicker">공동수강 후보</p>
+                <h2>같이 묶을 학교</h2>
+              </div>
+              <div class="partner-list" id="partnerList"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+                <p class="panel-kicker">학교용</p>
+                <h2>우리 학교 개설 추천</h2>
+              </div>
+              <div class="school-gap-list" id="schoolGapList"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+                <p class="panel-kicker">교육청용</p>
+                <h2>개설 우선순위</h2>
               </div>
               <div class="priority-grid" id="priorityGrid"></div>
             </section>
@@ -242,6 +189,6 @@
       </main>
     </div>
 
-    <script src="app.js"></script>
+    <script src="app.js?v=20260530"></script>
   </body>
 </html>
