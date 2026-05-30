@@ -322,25 +322,43 @@ input[type="range"] {
   border-radius: var(--radius);
 }
 
+/* 기존 코드 대체 및 추가 */
 .flow-strip span {
   position: relative;
-  display: grid;
+  display: flex; /* 텍스트 정렬을 위해 grid에서 flex로 변경 */
+  align-items: center;
+  justify-content: center;
   min-height: 86px;
-  place-items: center;
-  padding: 16px 28px;
+  /* 이전 화살표(28px)에 텍스트가 가려지지 않도록 좌측 패딩(42px) 여유 확보 */
+  padding: 16px 20px 16px 42px; 
   color: white;
   font-size: clamp(0.92rem, 1.4vw, 1.08rem);
   font-weight: 900;
   text-align: center;
+  word-break: keep-all; /* 한국어 단어가 중간에 잘리지 않고 줄바꿈되도록 설정 */
 }
 
+/* 첫 번째 요소는 이전 화살표가 없으므로 원래 패딩 유지 */
+.flow-strip span:first-child {
+  padding-left: 28px;
+}
+
+/* 화살표 배경이 다음 카드의 텍스트를 가리지 않도록 z-index를 역순으로 부여 */
+.flow-strip span:nth-child(1) { z-index: 5; }
+.flow-strip span:nth-child(2) { z-index: 4; }
+.flow-strip span:nth-child(3) { z-index: 3; }
+.flow-strip span:nth-child(4) { z-index: 2; }
+.flow-strip span:nth-child(5) { z-index: 1; }
+
+/* 기존 .flow-strip span::after 코드를 아래와 같이 수정하세요 */
 .flow-strip span::after {
   position: absolute;
-  top: 0;
+  top: 50%;                     /* 상단 고정(0)에서 세로 중앙 배치로 변경 */
+  transform: translateY(-50%);  /* 세로 중앙 정렬 보정 (텍스트 래핑 대응) */
   right: -28px;
   z-index: 1;
-  width: 56px;
-  height: 100%;
+  width: 0;                     /* 기존 56px -> 0으로 수정 */
+  height: 0;                    /* 기존 100% -> 0으로 수정 */
   border-top: 43px solid transparent;
   border-bottom: 43px solid transparent;
   border-left: 28px solid rgba(255, 255, 255, 0.8);
@@ -524,6 +542,26 @@ input[type="range"] {
   border-radius: var(--radius);
 }
 
+.priority-card span {
+  /* 좌측 번호 아이콘이 우측의 여러 줄 콘텐츠 옆에 잘 머물도록 설정 */
+  grid-row: span 3;
+}
+
+.priority-card p {
+  grid-column: 2; /* 두 번째 열에 위치 */
+  margin-top: 4px;
+  margin-bottom: 8px; /* 아래쪽 수요/배지와의 간격 추가 */
+}
+
+.priority-card div {
+  grid-column: 2; /* 두 번째 열에 위치 */
+  display: flex; /* 기존 grid에서 flex로 변경하여 수평 배치 */
+  flex-direction: row; /* 수평 방향으로 아이템 배치 */
+  gap: 8px;
+  align-items: center;
+  justify-content: end; /* 기존 우측 정렬(end)에서 좌측 정렬(start)로 변경 */
+}
+
 .info-card strong,
 .course-combo strong,
 .partner-item strong,
@@ -614,18 +652,12 @@ input[type="range"] {
   grid-column: 2;
 }
 
-.priority-card div {
-  display: grid;
-  gap: 6px;
-  justify-items: end;
-}
-
 .priority-card b {
   color: var(--navy);
   font-size: 0.9rem;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1100px) {
   .hero-app,
   .result-layout,
   .priority-layout {
@@ -674,14 +706,5 @@ input[type="range"] {
 
   .hero-copy h1 {
     font-size: clamp(2.45rem, 13vw, 3.25rem);
-  }
-
-  .course-combo article,
-  .priority-card {
-    grid-template-columns: 1fr;
-  }
-
-  .priority-card div {
-    justify-items: start;
   }
 }
