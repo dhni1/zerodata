@@ -731,11 +731,6 @@ function bindEvents() {
   $("#matcherSchool").addEventListener("change", renderMatch);
   $("#matcherCourse").addEventListener("change", renderMatch);
   $("#studentCount").addEventListener("input", renderMatch);
-  $("#recalculateButton").addEventListener("click", () => {
-    renderDashboard();
-    renderMatch();
-  });
-
   window.addEventListener("resize", () => {
     window.requestAnimationFrame(renderCharts);
   });
