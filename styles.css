@@ -217,18 +217,10 @@ main {
   text-transform: uppercase;
 }
 
-.hero-copy {
-  max-width: 650px;
-  margin: 16px 0 0;
-  color: #41545d;
-  font-size: clamp(1rem, 1.7vw, 1.18rem);
-}
-
 .region-segment {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 22px;
 }
 
 .segment-button {
