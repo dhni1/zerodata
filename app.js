@@ -133,6 +133,11 @@ const groupLabels = {
 };
 
 const $ = (selector) => document.querySelector(selector);
+let runFeedbackTimer;
+
+function buttonContent(icon, label) {
+  return `<span class="material-symbols-outlined" aria-hidden="true">${icon}</span>${label}`;
+}
 
 function withSubjectParticle(text) {
   const lastChar = text.trim().charCodeAt(text.trim().length - 1);
@@ -556,11 +561,34 @@ function bindEvents() {
   });
 
   $("#runMatchButton").addEventListener("click", () => {
-    renderResult();
-    $("#runMatchButton").classList.remove("is-running");
-    $(".ai-report-panel").classList.remove("is-running");
-    window.requestAnimationFrame(() => $("#runMatchButton").classList.add("is-running"));
-    window.requestAnimationFrame(() => $(".ai-report-panel").classList.add("is-running"));
+    const button = $("#runMatchButton");
+    const resultPanel = $(".result-panel");
+    const reportPanel = $(".ai-report-panel");
+    window.clearTimeout(runFeedbackTimer);
+
+    button.disabled = true;
+    button.classList.remove("is-complete");
+    button.classList.add("is-loading");
+    button.innerHTML = buttonContent("sync", "AI 분석 중...");
+    resultPanel.classList.remove("is-running");
+    reportPanel.classList.remove("is-running");
+
+    window.setTimeout(() => {
+      renderResult();
+      button.disabled = false;
+      button.classList.remove("is-loading");
+      button.classList.add("is-running", "is-complete");
+      button.innerHTML = buttonContent("task_alt", "추천 완료");
+      window.requestAnimationFrame(() => {
+        resultPanel.classList.add("is-running");
+        reportPanel.classList.add("is-running");
+      });
+
+      runFeedbackTimer = window.setTimeout(() => {
+        button.classList.remove("is-running", "is-complete");
+        button.innerHTML = buttonContent("smart_toy", "AI 추천 실행");
+      }, 1400);
+    }, 420);
   });
 }
 
