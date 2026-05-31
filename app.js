@@ -297,6 +297,13 @@ const groupLabels = {
   language: "국제·언어",
 };
 
+const officeLabels = {
+  서울: "서울특별시교육청",
+  경기: "경기도교육청",
+  전북: "전북특별자치도교육청",
+  강원: "강원특별자치도교육청",
+};
+
 const $ = (selector) => document.querySelector(selector);
 let runFeedbackTimer;
 
@@ -324,6 +331,14 @@ function uniqueCourses() {
 
 function getCourseMeta(course) {
   return courseMeta[course] || { group: "humanities", field: "상관없음" };
+}
+
+function educationOffices() {
+  return Array.from(new Set(schools.map((school) => school.region)));
+}
+
+function schoolsByOffice(region) {
+  return schools.filter((school) => school.region === region);
 }
 
 function fieldMatches(course, field) {
@@ -415,7 +430,9 @@ function schoolGapRecommendations(school, field) {
 }
 
 function createRouteAnalysis() {
-  const school = schools.find((item) => item.id === $("#matcherSchool").value) || schools[0];
+  const selectedOffice = $("#matcherOffice").value;
+  const officeSchools = schoolsByOffice(selectedOffice);
+  const school = officeSchools.find((item) => item.id === $("#matcherSchool").value) || officeSchools[0] || schools[0];
   const course = $("#matcherCourse").value;
   const field = $("#careerField").value;
   const meta = getCourseMeta(course);
@@ -484,9 +501,23 @@ function createRouteAnalysis() {
   };
 }
 
+function renderSchoolOptions(selectedSchoolId) {
+  const region = $("#matcherOffice").value || "경기";
+  const matchingSchools = schoolsByOffice(region);
+  $("#matcherSchool").innerHTML = matchingSchools
+    .map((school) => `<option value="${school.id}">${school.name} · ${school.region} ${school.district}</option>`)
+    .join("");
+  const nextSchool = matchingSchools.some((school) => school.id === selectedSchoolId) ? selectedSchoolId : matchingSchools[0]?.id;
+  if (nextSchool) $("#matcherSchool").value = nextSchool;
+}
+
 function renderOptions() {
-  $("#matcherSchool").innerHTML = schools.map((school) => `<option value="${school.id}">${school.name} · ${school.region} ${school.district}</option>`).join("");
+  $("#matcherOffice").innerHTML = educationOffices()
+    .map((region) => `<option value="${region}">${officeLabels[region] || `${region}교육청`}</option>`)
+    .join("");
   $("#matcherCourse").innerHTML = uniqueCourses().map((course) => `<option value="${course}">${course}</option>`).join("");
+  $("#matcherOffice").value = "경기";
+  renderSchoolOptions("pocheon");
   $("#matcherSchool").value = "pocheon";
   $("#matcherCourse").value = "인공지능 기초";
   $("#careerField").value = "공학·AI";
@@ -753,6 +784,11 @@ function renderPriorityGrid() {
 }
 
 function bindEvents() {
+  $("#matcherOffice").addEventListener("change", () => {
+    renderSchoolOptions();
+    renderResult();
+  });
+
   ["matcherSchool", "matcherCourse", "careerField"].forEach((id) => {
     $(`#${id}`).addEventListener("input", renderResult);
     $(`#${id}`).addEventListener("change", renderResult);
