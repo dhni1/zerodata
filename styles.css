@@ -252,7 +252,6 @@ main {
 
 .card-heading,
 .result-top,
-.range-heading,
 .mini-heading,
 .column-title {
   display: flex;
@@ -293,8 +292,7 @@ main {
   gap: 8px;
 }
 
-.field label,
-.range-heading label {
+.field label {
   color: var(--muted);
   font-size: 0.82rem;
   font-weight: 850;
@@ -316,25 +314,39 @@ select:focus {
   box-shadow: 0 0 0 3px rgba(55, 86, 191, 0.18);
 }
 
-.range-field {
-  padding-top: 8px;
+.auto-demand-card {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  background: rgba(224, 231, 255, 0.52);
+  border: 1px solid rgba(55, 86, 191, 0.16);
+  border-radius: 18px;
 }
 
-.range-heading strong {
-  color: var(--secondary);
-  font-size: 0.9rem;
-}
-
-input[type="range"] {
-  width: 100%;
-  accent-color: var(--secondary);
-}
-
-.range-meta {
+.auto-demand-card div {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  color: #7b7f89;
-  font-size: 0.78rem;
+  gap: 16px;
+}
+
+.auto-demand-card span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 850;
+}
+
+.auto-demand-card strong {
+  color: var(--secondary);
+  font-size: 1.15rem;
+  font-weight: 950;
+  white-space: nowrap;
+}
+
+.auto-demand-card p {
+  margin: 0;
+  color: #5b6170;
+  font-size: 0.8rem;
 }
 
 .primary-action {

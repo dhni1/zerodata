@@ -82,16 +82,12 @@
               </div>
             </div>
 
-            <div class="field range-field">
-              <div class="range-heading">
-                <label for="studentCount">우리 학교 예상 수요</label>
-                <strong id="studentCountLabel">7명</strong>
+            <div class="auto-demand-card" aria-live="polite">
+              <div>
+                <span>우리 학교 예상 수요</span>
+                <strong id="studentDemandLabel">자동 산정 중</strong>
               </div>
-              <input id="studentCount" type="range" min="1" max="24" value="7" />
-              <div class="range-meta">
-                <span>1명</span>
-                <span>24명</span>
-              </div>
+              <p id="studentDemandNote">학교·과목·진로 데이터를 기준으로 자동 계산합니다.</p>
             </div>
 
             <button class="primary-action" type="button" id="runMatchButton">
@@ -265,6 +261,6 @@
       </nav>
     </footer>
 
-    <script src="app.js?v=20260531-school-rank"></script>
+    <script src="app.js?v=20260531-auto-demand"></script>
   </body>
 </html>

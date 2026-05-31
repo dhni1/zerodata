@@ -343,6 +343,36 @@ function demandPartners(course, currentSchool) {
     .sort((a, b) => b.demand - a.demand);
 }
 
+function estimateSchoolDemand(school, course, field) {
+  const directDemand = school.demand[course];
+  if (directDemand) {
+    return { count: directDemand, source: "학교 희망 과목 데이터 기반 자동 산정" };
+  }
+
+  const meta = getCourseMeta(course);
+  const inSchool = school.schoolCourses.includes(course);
+  const similarDemands = Object.entries(school.demand)
+    .filter(([demandCourse]) => getCourseMeta(demandCourse).group === meta.group)
+    .map(([, demand]) => demand);
+  const similarAverage = similarDemands.length
+    ? Math.round(similarDemands.reduce((sum, demand) => sum + demand, 0) / similarDemands.length)
+    : 0;
+  const groupStrength = school.groups[meta.group] || 2;
+  const fieldBonus = fieldMatches(course, field) ? 2 : 0;
+
+  if (inSchool) {
+    return {
+      count: Math.min(18, Math.max(8, similarAverage || Math.round(groupStrength * 0.75))),
+      source: "교내 개설 이력과 같은 과목군 수요 기반 자동 산정",
+    };
+  }
+
+  return {
+    count: Math.min(16, Math.max(3, similarAverage || Math.round(groupStrength * 0.8) + fieldBonus)),
+    source: "비슷한 과목군과 희망 진로 기반 자동 산정",
+  };
+}
+
 function courseDemand(course) {
   return schools.reduce((sum, school) => sum + (school.demand[course] || 0), 0);
 }
@@ -388,9 +418,10 @@ function createRouteAnalysis() {
   const school = schools.find((item) => item.id === $("#matcherSchool").value) || schools[0];
   const course = $("#matcherCourse").value;
   const field = $("#careerField").value;
-  const studentCount = Number($("#studentCount").value);
   const meta = getCourseMeta(course);
   const inSchool = school.schoolCourses.includes(course);
+  const demandEstimate = estimateSchoolDemand(school, course, field);
+  const studentCount = demandEstimate.count;
   const joint = jointCourses.find((item) => item.course === course);
   const hosts = hostSchools(course, school);
   const regionalHost = hosts.find((item) => item.region === school.region);
@@ -435,6 +466,7 @@ function createRouteAnalysis() {
     course,
     field,
     studentCount,
+    demandSource: demandEstimate.source,
     meta,
     inSchool,
     joint,
@@ -569,7 +601,8 @@ function renderAiRecommendation(analysis) {
 
 function renderResult() {
   const analysis = createRouteAnalysis();
-  $("#studentCountLabel").textContent = `${analysis.studentCount}명`;
+  $("#studentDemandLabel").textContent = `${analysis.studentCount}명`;
+  $("#studentDemandNote").textContent = analysis.demandSource;
   $("#routeBadge").textContent = analysis.badge;
   $("#routeBadge").className = `status-badge ${analysis.badgeClass}`;
   $("#matchScore").textContent = `${analysis.score}점`;
@@ -720,7 +753,7 @@ function renderPriorityGrid() {
 }
 
 function bindEvents() {
-  ["matcherSchool", "matcherCourse", "careerField", "studentCount"].forEach((id) => {
+  ["matcherSchool", "matcherCourse", "careerField"].forEach((id) => {
     $(`#${id}`).addEventListener("input", renderResult);
     $(`#${id}`).addEventListener("change", renderResult);
   });
