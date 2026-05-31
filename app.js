@@ -311,6 +311,92 @@ function routeSteps(analysis) {
   ];
 }
 
+function buildAiRecommendation(analysis) {
+  const sameRegionPartners = analysis.pickedPartners.filter((item) => item.school.region === analysis.school.region);
+  const partnerLabel = analysis.pickedPartners.length
+    ? analysis.pickedPartners.map((item) => `${item.school.name} ${item.demand}명`).join(", ")
+    : "추가 모집 수요";
+  const routeLabel = analysis.inSchool
+    ? "교내 수강"
+    : analysis.joint
+      ? `${analysis.joint.mode} 공동교육과정`
+      : analysis.regionalHost
+        ? "인근 학교 연계"
+        : "신규 공동강좌 개설";
+  const confidence = Math.min(99, Math.max(58, analysis.score + (analysis.careerFit ? 0 : -6) + (analysis.combinedDemand >= 12 ? 3 : -4)));
+
+  let title = `${routeLabel}을 1순위로 추천`;
+  if (analysis.inSchool) title = "교내 수강 + 진로 심화 조합 추천";
+  if (!analysis.inSchool && !analysis.joint && !analysis.regionalHost) title = "교육청 신규 개설 요청 추천";
+
+  const summary = analysis.inSchool
+    ? `${analysis.course}은 이미 ${analysis.school.name}에 개설되어 있어 수강 가능성이 높습니다. AI는 같은 진로군의 심화 과목을 함께 묶어 학습 경로를 만드는 방안을 추천합니다.`
+    : `${analysis.school.name}의 ${analysis.course} 미개설 상태, ${analysis.combinedDemand}명 결합 수요, ${analysis.externalRoute} 가능성을 함께 계산해 ${routeLabel} 경로를 추천합니다.`;
+
+  const reasons = [
+    analysis.inSchool
+      ? "학교 교육과정에 이미 포함되어 이동 부담과 개설 불확실성이 가장 낮습니다."
+      : `${analysis.school.name} 자체 수요 ${analysis.studentCount}명에 ${partnerLabel}을 결합할 수 있습니다.`,
+    analysis.inSchool
+      ? `${analysis.school.name} 안에서 바로 신청할 수 있어 상담과 시간표 조정이 단순합니다.`
+      : analysis.joint
+      ? `${analysis.joint.provider}에 ${analysis.course} 강좌가 있어 기존 공동교육 인프라를 활용할 수 있습니다.`
+      : analysis.regionalHost
+        ? `${analysis.regionalHost.name}에서 이미 운영 중이라 학교 간 연계 후보가 있습니다.`
+        : "현재 공동강좌가 적어 교육청 개설 우선순위 후보로 올리는 편이 적합합니다.",
+    analysis.careerFit
+      ? `${analysis.course}은 ${analysis.field} 진로와 직접 연결되는 과목입니다.`
+      : `${analysis.course}과 ${analysis.field} 진로의 직접 연결성이 낮아 보완 과목 조합이 필요합니다.`,
+    sameRegionPartners.length
+      ? `같은 권역에서 ${sameRegionPartners.length}개 학교 수요가 확인되어 이동·운영 부담이 낮습니다.`
+      : analysis.joint?.mode === "온라인"
+        ? "온라인 방식이라 지역 차이에 따른 이동 부담을 줄일 수 있습니다."
+        : `${analysis.school.region} 권역 내 수요가 약해 추가 모집 또는 온라인 전환 검토가 필요합니다.`,
+  ];
+
+  const risks = [
+    analysis.combinedDemand >= 12
+      ? "결합 수요는 충분한 편이지만 실제 신청 전환율 확인이 필요합니다."
+      : "결합 수요가 낮아 최소 개설 인원에 못 미칠 수 있습니다.",
+    analysis.inSchool
+      ? "교내 개설 과목도 학년별 시간표와 선택군 충돌 여부를 확인해야 합니다."
+      : analysis.joint?.mode === "오프라인"
+      ? "오프라인 공동교육과정은 이동 시간과 시간표 충돌을 먼저 확인해야 합니다."
+      : "온라인 또는 혼합 경로는 평가 방식과 출결 기준 확인이 필요합니다.",
+    analysis.careerFit
+      ? "진로 적합도는 높지만 후속 심화 과목까지 이어지는지 확인해야 합니다."
+      : "희망 진로와 과목군이 다르므로 상담 단계에서 선택 이유를 보완해야 합니다.",
+  ];
+
+  const actions = [
+    analysis.inSchool
+      ? `${analysis.school.name} 수강 신청 기간에 ${analysis.course}을 1순위로 등록`
+      : `${analysis.school.name} 수요 ${analysis.studentCount}명과 연결 학교 수요를 묶어 공동수강 신청서 작성`,
+    analysis.inSchool
+      ? `교육과정 담당 교사와 ${analysis.course} 선택군, 평가 방식, 후속 과목을 확인`
+      : analysis.joint
+      ? `${analysis.joint.provider}의 ${analysis.joint.mode} 운영 일정과 정원을 확인`
+      : analysis.regionalHost
+        ? `${analysis.regionalHost.name} 담당자에게 연계 수강 가능 여부 확인`
+        : `${analysis.region || analysis.school.region} 교육청에 ${analysis.course} 신규 공동강좌 개설 요청`,
+    analysis.careerFit
+      ? `${analysis.field} 진로 포트폴리오에 연결할 수행평가·탐구 주제까지 함께 설계`
+      : `${analysis.field} 진로에 맞는 보완 과목을 1개 이상 추가 추천`,
+  ];
+
+  return { title, summary, confidence, reasons, risks, actions };
+}
+
+function renderAiRecommendation(analysis) {
+  const report = buildAiRecommendation(analysis);
+  $("#aiRecommendationTitle").textContent = report.title;
+  $("#aiRecommendationSummary").textContent = report.summary;
+  $("#aiConfidence").textContent = `${report.confidence}%`;
+  $("#aiRecommendationReasons").innerHTML = report.reasons.map((item) => `<li>${item}</li>`).join("");
+  $("#aiRiskList").innerHTML = report.risks.map((item) => `<li>${item}</li>`).join("");
+  $("#aiActionPlan").innerHTML = report.actions.map((item) => `<li>${item}</li>`).join("");
+}
+
 function renderResult() {
   const analysis = createRouteAnalysis();
   $("#studentCountLabel").textContent = `${analysis.studentCount}명`;
@@ -325,6 +411,7 @@ function renderResult() {
   $("#routeSteps").innerHTML = routeSteps(analysis).map((step, index) => `<article><b>${index + 1}</b><span>${step}</span></article>`).join("");
 
   renderRecommendationCards(analysis);
+  renderAiRecommendation(analysis);
   renderCareerCourses(analysis);
   renderPartners(analysis);
   renderSchoolGaps(analysis);
@@ -471,7 +558,9 @@ function bindEvents() {
   $("#runMatchButton").addEventListener("click", () => {
     renderResult();
     $("#runMatchButton").classList.remove("is-running");
+    $(".ai-report-panel").classList.remove("is-running");
     window.requestAnimationFrame(() => $("#runMatchButton").classList.add("is-running"));
+    window.requestAnimationFrame(() => $(".ai-report-panel").classList.add("is-running"));
   });
 }
 

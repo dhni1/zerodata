@@ -162,6 +162,46 @@
                 </div>
               </section>
             </aside>
+
+            <section class="glass-panel ai-report-panel" aria-live="polite" aria-label="AI 추천 리포트">
+              <div class="ai-report-head">
+                <div>
+                  <span class="status-badge status-low">실시간 AI 추천</span>
+                  <h3 id="aiRecommendationTitle">추천 리포트를 생성합니다</h3>
+                  <p id="aiRecommendationSummary"></p>
+                </div>
+                <div class="ai-confidence">
+                  <strong id="aiConfidence">0%</strong>
+                  <span>추천 확신도</span>
+                </div>
+              </div>
+
+              <div class="ai-report-grid">
+                <article class="ai-report-card">
+                  <div class="mini-heading">
+                    <h4>판단 근거</h4>
+                    <span class="material-symbols-outlined" aria-hidden="true">psychology</span>
+                  </div>
+                  <ul class="ai-list" id="aiRecommendationReasons"></ul>
+                </article>
+
+                <article class="ai-report-card caution">
+                  <div class="mini-heading">
+                    <h4>확인할 리스크</h4>
+                    <span class="material-symbols-outlined" aria-hidden="true">rule</span>
+                  </div>
+                  <ul class="ai-list" id="aiRiskList"></ul>
+                </article>
+
+                <article class="ai-report-card action">
+                  <div class="mini-heading">
+                    <h4>다음 실행</h4>
+                    <span class="material-symbols-outlined" aria-hidden="true">task_alt</span>
+                  </div>
+                  <ol class="ai-list numbered" id="aiActionPlan"></ol>
+                </article>
+              </div>
+            </section>
           </div>
         </div>
       </section>
@@ -224,6 +264,6 @@
       </nav>
     </footer>
 
-    <script src="app.js?v=20260531"></script>
+    <script src="app.js?v=20260531-ai"></script>
   </body>
 </html>
