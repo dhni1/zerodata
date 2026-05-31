@@ -3,53 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CourseBridge</title>
+    <title>CourseBridge - AI Academic Matching</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="app-shell">
-      <header class="topbar">
-        <div class="brand">
-          <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" role="img">
-              <path d="M4 7.2 12 3l8 4.2-8 4.2L4 7.2Z" />
-              <path d="M6.3 10.1V15c0 1.3 2.6 3.2 5.7 3.2s5.7-1.9 5.7-3.2v-4.9" />
-              <path d="M20 8v5.2" />
-            </svg>
-          </span>
-          <strong>CourseBridge</strong>
-        </div>
-      </header>
+    <nav class="topbar" aria-label="주요 이동">
+      <a class="nav-brand" href="#overview" aria-label="CourseBridge 홈">CourseBridge</a>
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#matching">AI Matching</a>
+        <a href="#collaboration">Community</a>
+      </div>
+      <a class="nav-action" href="#matching">Get Started</a>
+    </nav>
 
-      <main>
-        <section class="hero-app">
+    <main>
+      <section class="hero-section" id="overview">
+        <div class="hero-grid">
           <div class="hero-copy">
-            <p class="service-label">AI 공동수강 매칭 서비스</p>
-            <h1>CourseBridge</h1>
+            <p class="service-pill">
+              <span class="material-symbols-outlined" aria-hidden="true">auto_awesome</span>
+              AI 공동수강 매칭 서비스
+            </p>
+            <h1>Course<span>Bridge</span></h1>
             <p class="intro-copy">
               고교학점제에서 학생이 원하는 과목을 더 쉽게 찾고 수강할 수 있도록 학교별 개설 과목, 공동교육과정, 학생 희망 과목 데이터를 함께 분석합니다.
             </p>
 
             <div class="feature-grid" aria-label="서비스 핵심 기능">
               <article class="feature-item">
+                <span class="material-symbols-outlined" aria-hidden="true">insights</span>
                 <strong>AI 매칭 엔진</strong>
-                <span>교내 개설 여부와 학생 수요를 분석해 개인 맞춤형 수강 경로 추천</span>
+                <p>교내 개설 여부와 학생 수요 분석</p>
               </article>
               <article class="feature-item">
+                <span class="material-symbols-outlined" aria-hidden="true">hub</span>
                 <strong>온·오프라인 통합</strong>
-                <span>공동교육과정, 온라인 강좌, 인근 학교 강좌까지 하나의 경로로 연결</span>
+                <p>공동교육 및 온라인 강좌 연결</p>
               </article>
               <article class="feature-item">
+                <span class="material-symbols-outlined" aria-hidden="true">rocket_launch</span>
                 <strong>개설 과목 추천</strong>
-                <span>학교와 교육청에 부족 과목과 우선 개설 후보를 제안해 선택권 격차 완화</span>
+                <p>부족 과목 및 우선 개설 후보 제안</p>
               </article>
             </div>
           </div>
 
-          <section class="panel input-panel" aria-label="AI 매칭 입력">
-            <div class="panel-heading">
-              <p class="panel-kicker">AI 매칭 입력</p>
+          <section class="glass-panel input-panel" aria-label="AI 매칭 입력">
+            <div class="card-heading">
               <h2>수강 경로 추천</h2>
+              <span>AI 매칭 입력</span>
             </div>
 
             <div class="field">
@@ -57,58 +64,72 @@
               <select id="matcherSchool"></select>
             </div>
 
-            <div class="field">
-              <label for="matcherCourse">희망 과목</label>
-              <select id="matcherCourse"></select>
+            <div class="input-grid">
+              <div class="field">
+                <label for="matcherCourse">희망 과목</label>
+                <select id="matcherCourse"></select>
+              </div>
+              <div class="field">
+                <label for="careerField">희망 진로</label>
+                <select id="careerField">
+                  <option value="공학·AI">공학·AI</option>
+                  <option value="자연과학">자연과학</option>
+                  <option value="인문사회">인문사회</option>
+                  <option value="예술·미디어">예술·미디어</option>
+                  <option value="국제·언어">국제·언어</option>
+                  <option value="상관없음">상관없음</option>
+                </select>
+              </div>
             </div>
 
-            <div class="field">
-              <label for="careerField">희망 진로</label>
-              <select id="careerField">
-                <option value="공학·AI">공학·AI</option>
-                <option value="자연과학">자연과학</option>
-                <option value="인문사회">인문사회</option>
-                <option value="예술·미디어">예술·미디어</option>
-                <option value="국제·언어">국제·언어</option>
-                <option value="상관없음">상관없음</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="studentCount">우리 학교 예상 수요</label>
+            <div class="field range-field">
+              <div class="range-heading">
+                <label for="studentCount">우리 학교 예상 수요</label>
+                <strong id="studentCountLabel">7명</strong>
+              </div>
               <input id="studentCount" type="range" min="1" max="24" value="7" />
               <div class="range-meta">
                 <span>1명</span>
-                <strong id="studentCountLabel">7명</strong>
                 <span>24명</span>
               </div>
             </div>
 
-            <button class="primary-action" type="button" id="runMatchButton">AI 추천 실행</button>
+            <button class="primary-action" type="button" id="runMatchButton">
+              <span class="material-symbols-outlined" aria-hidden="true">smart_toy</span>
+              AI 추천 실행
+            </button>
           </section>
-        </section>
+        </div>
+      </section>
 
-        <section class="work-section">
-          <div class="section-title">
-            <span>01</span>
-            <h2>개인 맞춤형 수강 경로 추천</h2>
+      <section class="path-section section-band" id="matching">
+        <div class="section-inner">
+          <div class="section-heading">
+            <div>
+              <span class="section-number">01</span>
+              <h2>개인 맞춤형 수강 경로 추천</h2>
+            </div>
+            <div class="stepper" aria-label="개인 맞춤형 추천 절차">
+              <span>우리 학교 개설 여부</span>
+              <span>대체 경로 추천</span>
+              <span>과목 조합 제시</span>
+              <span>공동교육 연결</span>
+            </div>
           </div>
 
-          <div class="flow-strip flow-blue" aria-label="개인 맞춤형 추천 절차">
-            <span>우리 학교 개설 여부 확인</span>
-            <span>미개설 시 대체 경로 추천</span>
-            <span>진로 분야별 과목 조합 제시</span>
-            <span>공동교육과정·온라인 강좌 연결</span>
-          </div>
-
-          <div class="result-layout">
-            <section class="panel result-panel" aria-live="polite">
-              <div class="result-heading">
-                <span class="status-badge" id="routeBadge">분석 대기</span>
-                <strong class="score-pill" id="matchScore">0점</strong>
+          <div class="result-grid">
+            <section class="glass-panel result-panel ai-glow-hover" aria-live="polite">
+              <div class="result-top">
+                <div>
+                  <span class="status-badge" id="routeBadge">분석 대기</span>
+                  <h3 id="matchTitle">수강 경로를 분석합니다</h3>
+                  <p id="matchSummary"></p>
+                </div>
+                <div class="score-ring">
+                  <strong id="matchScore">0점</strong>
+                  <span>AI 매칭점수</span>
+                </div>
               </div>
-              <h3 id="matchTitle">수강 경로를 분석합니다</h3>
-              <p id="matchSummary"></p>
 
               <div class="metric-grid">
                 <article>
@@ -128,67 +149,81 @@
               <div class="route-step-list" id="routeSteps"></div>
             </section>
 
-            <section class="panel">
-              <div class="panel-heading">
-                <p class="panel-kicker">추천 경로</p>
-                <h2>학생에게 제시할 선택지</h2>
-              </div>
-              <div class="card-list" id="recommendationCards"></div>
-            </section>
-
-            <section class="panel">
-              <div class="panel-heading">
-                <p class="panel-kicker">진로 설계</p>
-                <h2>함께 들으면 좋은 과목</h2>
-              </div>
-              <div class="course-combo" id="careerCourseList"></div>
-            </section>
+            <aside class="side-panel">
+              <section class="panel-lite">
+                <div class="mini-heading">
+                  <h3>학생에게 제시할 선택지</h3>
+                  <span class="material-symbols-outlined" aria-hidden="true">explore</span>
+                </div>
+                <div class="card-list" id="recommendationCards"></div>
+                <div class="course-box">
+                  <h4>함께 들으면 좋은 과목</h4>
+                  <div class="course-combo" id="careerCourseList"></div>
+                </div>
+              </section>
+            </aside>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="work-section">
-          <div class="section-title">
-            <span>02</span>
+      <section class="collab-section" id="collaboration">
+        <div class="section-inner">
+          <div class="section-heading stacked">
+            <span class="section-number">02</span>
             <h2>학교 간 공동수강 매칭 및 개설 우선순위 분석</h2>
+            <p>데이터 기반의 지역 교육 클러스터링을 통해 학교와 지역에 따른 과목 선택권 격차를 줄입니다.</p>
           </div>
 
-          <div class="flow-strip flow-orange" aria-label="공동수강 개설 분석 절차">
-            <span>학교별 부족 과목군 진단</span>
-            <span>여러 학교의 소규모 수요 통합</span>
-            <span>공동강좌 개설 가능 학교 조합 추천</span>
-            <span>교육청 우선 지원 지역·과목 분석</span>
-            <span>개설 효과 시뮬레이션</span>
-          </div>
-
-          <div class="priority-layout">
-            <section class="panel">
-              <div class="panel-heading">
-                <p class="panel-kicker">공동수강 후보</p>
-                <h2>같이 묶을 학교</h2>
+          <div class="analysis-grid">
+            <section class="analysis-column compact">
+              <div class="column-title">
+                <span class="material-symbols-outlined" aria-hidden="true">group_add</span>
+                <h3>같이 묶을 학교</h3>
               </div>
               <div class="partner-list" id="partnerList"></div>
             </section>
 
-            <section class="panel">
-              <div class="panel-heading">
-                <p class="panel-kicker">학교용</p>
-                <h2>우리 학교 개설 추천</h2>
+            <section class="analysis-column featured">
+              <div class="column-title">
+                <span class="material-symbols-outlined" aria-hidden="true">school</span>
+                <h3>우리 학교 개설 추천</h3>
               </div>
               <div class="school-gap-list" id="schoolGapList"></div>
             </section>
 
-            <section class="panel">
-              <div class="panel-heading">
-                <p class="panel-kicker">교육청용</p>
-                <h2>개설 우선순위</h2>
+            <section class="analysis-column">
+              <div class="column-title">
+                <span class="material-symbols-outlined" aria-hidden="true">analytics</span>
+                <h3>개설 우선순위</h3>
               </div>
               <div class="priority-grid" id="priorityGrid"></div>
+
+              <div class="simulation-card">
+                <div>
+                  <strong>개설 효과 시뮬레이션</strong>
+                  <p>신규 과목 개설 시 지역 만족도 24% 상승 예상</p>
+                </div>
+                <span class="material-symbols-outlined" aria-hidden="true">query_stats</span>
+              </div>
             </section>
           </div>
-        </section>
-      </main>
-    </div>
+        </div>
+      </section>
+    </main>
 
-    <script src="app.js?v=20260530"></script>
+    <footer class="site-footer">
+      <div>
+        <strong>CourseBridge</strong>
+        <p>AI 기반 공동수강 매칭으로 학생의 과목 접근성을 넓힙니다.</p>
+      </div>
+      <nav aria-label="푸터 링크">
+        <a href="#overview">Overview</a>
+        <a href="#matching">AI Matching</a>
+        <a href="#collaboration">Community</a>
+        <a href="mailto:support@coursebridge.ai">Contact</a>
+      </nav>
+    </footer>
+
+    <script src="app.js?v=20260531"></script>
   </body>
 </html>
