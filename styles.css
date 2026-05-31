@@ -580,6 +580,15 @@ input[type="range"] {
   font-size: 0.72rem;
 }
 
+.score-ring small {
+  max-width: 132px;
+  color: #6d7179;
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+}
+
 .metric-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

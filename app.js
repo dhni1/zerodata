@@ -22,6 +22,39 @@ const schools = [
     demand: { "인공지능 기초": 7, "데이터 과학": 6, "고급 화학": 4, "국제경제": 9 },
   },
   {
+    id: "yangjae",
+    name: "양재고",
+    region: "서울",
+    district: "서초구",
+    type: "대도시",
+    courses: { 2024: 58, 2025: 63 },
+    groups: { science: 13, ai: 7, humanities: 17, arts: 6, language: 5 },
+    schoolCourses: ["인공지능 기초", "프로그래밍", "고급 화학", "국제경제", "영상 제작의 이해"],
+    demand: { "데이터 과학": 9, "고급 물리학": 6, "심리학": 8, "미디어 콘텐츠 일반": 5 },
+  },
+  {
+    id: "sanggye",
+    name: "상계고",
+    region: "서울",
+    district: "노원구",
+    type: "대도시",
+    courses: { 2024: 50, 2025: 54 },
+    groups: { science: 9, ai: 4, humanities: 18, arts: 7, language: 4 },
+    schoolCourses: ["데이터 과학", "사회문제 탐구", "생활과 과학", "중국어 회화", "음악 감상과 비평"],
+    demand: { "인공지능 기초": 10, "프로그래밍": 7, "고급 생명과학": 6, "국제경제": 5 },
+  },
+  {
+    id: "myeongji",
+    name: "명지고",
+    region: "서울",
+    district: "서대문구",
+    type: "대도시",
+    courses: { 2024: 53, 2025: 57 },
+    groups: { science: 10, ai: 5, humanities: 17, arts: 8, language: 5 },
+    schoolCourses: ["심리학", "국제경제", "미디어 콘텐츠 일반", "생명과학 실험", "일본어 회화"],
+    demand: { "인공지능 기초": 6, "데이터 과학": 8, "프로그래밍": 6, "고급 물리학": 4 },
+  },
+  {
     id: "suwon",
     name: "수원고",
     region: "경기",
@@ -42,6 +75,50 @@ const schools = [
     groups: { science: 7, ai: 2, humanities: 13, arts: 5, language: 2 },
     schoolCourses: ["사회문제 탐구", "생명과학 실험", "일본어 회화", "음악 감상과 비평"],
     demand: { "인공지능 기초": 9, "데이터 과학": 5, "고급 물리학": 6, "프로그래밍": 8 },
+  },
+  {
+    id: "bundang",
+    name: "분당고",
+    region: "경기",
+    district: "성남시",
+    type: "수도권 중핵",
+    courses: { 2024: 57, 2025: 61 },
+    groups: { science: 13, ai: 8, humanities: 15, arts: 6, language: 4 },
+    schoolCourses: ["인공지능 기초", "데이터 과학", "프로그래밍", "고급 생명과학", "국제경제"],
+    demand: { "고급 물리학": 7, "고급 화학": 5, "심리학": 6, "영상 제작의 이해": 4 },
+  },
+  {
+    id: "goyang",
+    name: "고양일고",
+    region: "경기",
+    district: "고양시",
+    type: "수도권 중핵",
+    courses: { 2024: 52, 2025: 55 },
+    groups: { science: 11, ai: 5, humanities: 16, arts: 7, language: 5 },
+    schoolCourses: ["고급 물리학", "사회문제 탐구", "미디어 콘텐츠 일반", "중국어 회화", "생활과 과학"],
+    demand: { "인공지능 기초": 8, "데이터 과학": 7, "프로그래밍": 9, "심리학": 5 },
+  },
+  {
+    id: "icheon",
+    name: "이천고",
+    region: "경기",
+    district: "이천시",
+    type: "수도권 외곽",
+    courses: { 2024: 43, 2025: 46 },
+    groups: { science: 8, ai: 3, humanities: 14, arts: 6, language: 3 },
+    schoolCourses: ["데이터 과학", "생명과학 실험", "스포츠 생활", "일본어 회화"],
+    demand: { "인공지능 기초": 7, "프로그래밍": 6, "고급 화학": 5, "국제경제": 4 },
+  },
+  {
+    id: "anseong",
+    name: "안성고",
+    region: "경기",
+    district: "안성시",
+    type: "수도권 외곽",
+    courses: { 2024: 40, 2025: 43 },
+    groups: { science: 8, ai: 2, humanities: 13, arts: 5, language: 2 },
+    schoolCourses: ["사회문제 탐구", "고급 화학", "문예 창작 입문", "생활과 과학"],
+    demand: { "인공지능 기초": 8, "데이터 과학": 6, "고급 물리학": 5, "심리학": 7 },
   },
   {
     id: "jeonju",
@@ -66,6 +143,50 @@ const schools = [
     demand: { "인공지능 기초": 6, "데이터 과학": 4, "고급 화학": 5, "심리학": 7 },
   },
   {
+    id: "iksan",
+    name: "이리고",
+    region: "전북",
+    district: "익산시",
+    type: "중소도시",
+    courses: { 2024: 44, 2025: 48 },
+    groups: { science: 10, ai: 4, humanities: 15, arts: 5, language: 3 },
+    schoolCourses: ["인공지능 기초", "고급 생명과학", "사회문제 탐구", "중국어 회화"],
+    demand: { "데이터 과학": 7, "프로그래밍": 5, "고급 물리학": 6, "심리학": 8 },
+  },
+  {
+    id: "gunsan",
+    name: "군산고",
+    region: "전북",
+    district: "군산시",
+    type: "중소도시",
+    courses: { 2024: 46, 2025: 50 },
+    groups: { science: 10, ai: 4, humanities: 16, arts: 6, language: 3 },
+    schoolCourses: ["데이터 과학", "고급 화학", "국제경제", "영상 제작의 이해", "일본어 회화"],
+    demand: { "인공지능 기초": 6, "프로그래밍": 6, "고급 생명과학": 5, "심리학": 7 },
+  },
+  {
+    id: "namwon",
+    name: "남원고",
+    region: "전북",
+    district: "남원시",
+    type: "중소도시",
+    courses: { 2024: 38, 2025: 41 },
+    groups: { science: 7, ai: 2, humanities: 14, arts: 5, language: 2 },
+    schoolCourses: ["심리학", "사회문제 탐구", "생활과 과학", "문예 창작 입문"],
+    demand: { "인공지능 기초": 7, "데이터 과학": 5, "고급 화학": 6, "국제경제": 4 },
+  },
+  {
+    id: "buan",
+    name: "부안고",
+    region: "전북",
+    district: "부안군",
+    type: "농산어촌",
+    courses: { 2024: 32, 2025: 35 },
+    groups: { science: 6, ai: 1, humanities: 11, arts: 4, language: 2 },
+    schoolCourses: ["생활과 과학", "음악 감상과 비평", "스포츠 생활"],
+    demand: { "인공지능 기초": 5, "데이터 과학": 5, "프로그래밍": 4, "심리학": 6 },
+  },
+  {
     id: "chuncheon",
     name: "춘천고",
     region: "강원",
@@ -86,6 +207,50 @@ const schools = [
     groups: { science: 5, ai: 1, humanities: 10, arts: 4, language: 1 },
     schoolCourses: ["생활과 과학", "사회문제 탐구", "스포츠 생활"],
     demand: { "인공지능 기초": 5, "데이터 과학": 5, "고급 물리학": 4, "심리학": 6 },
+  },
+  {
+    id: "wonju",
+    name: "원주고",
+    region: "강원",
+    district: "원주시",
+    type: "중소도시",
+    courses: { 2024: 48, 2025: 51 },
+    groups: { science: 11, ai: 5, humanities: 15, arts: 5, language: 3 },
+    schoolCourses: ["데이터 과학", "고급 물리학", "국제경제", "미디어 콘텐츠 일반", "중국어 회화"],
+    demand: { "인공지능 기초": 7, "프로그래밍": 6, "고급 화학": 5, "심리학": 5 },
+  },
+  {
+    id: "gangneung",
+    name: "강릉고",
+    region: "강원",
+    district: "강릉시",
+    type: "중소도시",
+    courses: { 2024: 43, 2025: 47 },
+    groups: { science: 9, ai: 3, humanities: 15, arts: 6, language: 3 },
+    schoolCourses: ["인공지능 기초", "생명과학 실험", "사회문제 탐구", "영상 제작의 이해"],
+    demand: { "데이터 과학": 6, "프로그래밍": 5, "고급 물리학": 7, "국제경제": 4 },
+  },
+  {
+    id: "sokcho",
+    name: "속초고",
+    region: "강원",
+    district: "속초시",
+    type: "중소도시",
+    courses: { 2024: 39, 2025: 42 },
+    groups: { science: 8, ai: 2, humanities: 13, arts: 6, language: 2 },
+    schoolCourses: ["고급 생명과학", "심리학", "미디어 콘텐츠 일반", "생활과 과학"],
+    demand: { "인공지능 기초": 6, "데이터 과학": 5, "프로그래밍": 4, "고급 화학": 5 },
+  },
+  {
+    id: "taebaek",
+    name: "태백고",
+    region: "강원",
+    district: "태백시",
+    type: "농산어촌",
+    courses: { 2024: 30, 2025: 33 },
+    groups: { science: 5, ai: 1, humanities: 10, arts: 4, language: 1 },
+    schoolCourses: ["사회문제 탐구", "생활과 과학", "음악 감상과 비평"],
+    demand: { "인공지능 기초": 5, "데이터 과학": 4, "고급 물리학": 5, "심리학": 5 },
   },
 ];
 
@@ -520,7 +685,7 @@ function renderSchoolGaps(analysis) {
   const recommendations = schoolGapRecommendations(analysis.school, analysis.field);
   $("#schoolGapList").innerHTML = recommendations.length
     ? recommendations
-        .map((item) => {
+        .map((item, index) => {
           const route = item.joint ? `${item.joint.mode} 공동강좌` : item.regionHosts ? "인근 학교 연계" : "신규 개설";
           const effect = item.ownDemand + item.peerDemand;
           return `
@@ -529,7 +694,7 @@ function renderSchoolGaps(analysis) {
               <span>${groupLabels[item.meta.group]} · ${route}</span>
               <div>
                 <b>개설효과 ${effect}명</b>
-                <em>AI 우선도 ${Math.min(99, item.score)}점</em>
+                <em>${index + 1}순위</em>
               </div>
             </article>
           `;
